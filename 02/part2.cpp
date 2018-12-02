@@ -1,16 +1,17 @@
 #include <iostream>
 #include <optional>
 #include <set>
+#include <string_view>
 
 constexpr auto kMaxDiff = 'z' - 'a';
 
-std::optional<std::string> checkClose(const std::string &lhs, const std::string &rhs) {
+std::optional<std::string> checkClose(const std::string_view &lhs, const std::string_view &rhs) {
   for (auto i = 0; i < lhs.size(); ++i) {
     if (lhs[i] == rhs[i]) {
       continue;
     }
     if (lhs.substr(i + 1) == rhs.substr(i + 1)) {
-      return lhs.substr(0, i) + lhs.substr(i + 1);
+      return std::string{lhs.substr(0, i)} + std::string{lhs.substr(i + 1)};
     }
     return {};
   }
